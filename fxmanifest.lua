@@ -1,8 +1,8 @@
 fx_version 'cerulean'
 game 'gta5'
 author 'discord.gg/codesign'
-description 'Codesign Weather & Time Managment'
-version '1.3.7'
+description 'Codesign Weather & Time Managment - Updated for ESX Legacy'
+version '1.3.8'
 lua54 'yes'
 
 shared_scripts {
