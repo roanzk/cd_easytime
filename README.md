@@ -1,4 +1,5 @@
 # Easytime - FiveM Time and Weather
+## UPDATED FOR ESX!
 
 ![674x458](https://i.imgur.com/cHwhpau.png)
 
