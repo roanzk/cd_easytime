@@ -10,11 +10,9 @@ ESX = nil
 QBCore = nil
 vRP, vRPclient = nil, nil
 
+-- Initialize ESX Framework (Modern ESX Legacy method)
 if Config.Framework == 'esx' then
-    TriggerEvent(Config.FrameworkTriggers.main, function(obj) ESX = obj end)
-    if ESX == nil then
-        ESX = exports[Config.FrameworkTriggers.resource_name]:getSharedObject()
-    end
+    ESX = exports['es_extended']:getSharedObject()
 
 elseif Config.Framework == 'qbcore' then
     TriggerEvent(Config.FrameworkTriggers.main, function(obj) QBCore = obj end)
@@ -287,12 +285,30 @@ end)
 function PermissionsCheck(source)
     if Config.Framework == 'esx' then 
         local xPlayer = ESX.GetPlayerFromId(source)
+        if not xPlayer then return false end
+        
+        -- ESX Legacy permissions system
         local perms = xPlayer.getGroup()
-        for c, d in ipairs(Config.Command.Perms[Config.Framework]) do
-            if perms == d then
-                return true
+        if perms then
+            for c, d in ipairs(Config.Command.Perms[Config.Framework]) do
+                if perms == d then
+                    return true
+                end
             end
         end
+        
+        -- Fallback: Check if player has admin permissions
+        if xPlayer.getPermissions() then
+            local permissions = xPlayer.getPermissions()
+            for _, permission in pairs(permissions) do
+                for c, d in ipairs(Config.Command.Perms[Config.Framework]) do
+                    if permission == d then
+                        return true
+                    end
+                end
+            end
+        end
+        
         return false
     
     elseif Config.Framework == 'qbcore' then
