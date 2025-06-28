@@ -29,7 +29,7 @@ Config.Command = {
     OpenUI = 'easytime', --The command for staff to open the UI.
 
     Perms = { --You decide which permission groups can use the staff command ^.
-        ['esx'] = {'superadmin', 'admin', 'mod'},
+        ['esx'] = {'owner', 'admin'}, -- Updated for ESX Legacy permissions
         ['qbcore'] = {'god', 'admin'},
         ['vrp'] = {'change_me', 'change_me'},
         ['aceperms'] = {'change_me', 'change_me'},

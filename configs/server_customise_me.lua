@@ -9,7 +9,17 @@
 function Notification(source, notif_type, message)
     if source and notif_type and message then
         if Config.NotificationType.client == 'esx' then
+            -- ESX Legacy notification system
             TriggerClientEvent('esx:showNotification', source, message)
+            
+            -- Fallback for newer ESX versions
+            if not TriggerClientEvent then
+                TriggerClientEvent('ox_lib:notify', source, {
+                    title = 'EasyTime',
+                    description = message,
+                    type = notif_type == 1 and 'success' or notif_type == 2 and 'info' or 'error'
+                })
+            end
         
         elseif Config.NotificationType.client == 'qbcore' then
             if notif_type == 1 then
