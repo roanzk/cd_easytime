@@ -10,13 +10,8 @@ ESX, QBCore = nil, nil
 
 Citizen.CreateThread(function()
     if Config.Framework == 'esx' then
-        while ESX == nil do
-            TriggerEvent(Config.FrameworkTriggers.main, function(obj) ESX = obj end)
-            if ESX == nil then
-                ESX = exports[Config.FrameworkTriggers.resource_name]:getSharedObject()
-            end
-            Wait(100)
-        end
+        -- Initialize ESX Framework (Modern ESX Legacy method)
+        ESX = exports['es_extended']:getSharedObject()
 
         RegisterNetEvent(Config.FrameworkTriggers.load)
         AddEventHandler(Config.FrameworkTriggers.load, function(xPlayer)
